@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Student_DOB</fullName>
+    <active>true</active>
+    <errorConditionFormula>DOB__c  &gt;  TODAY()</errorConditionFormula>
+    <errorDisplayField>DOB__c</errorDisplayField>
+    <errorMessage>Student DOB should be greater than Today.</errorMessage>
+</ValidationRule>
