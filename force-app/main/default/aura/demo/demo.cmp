@@ -1,0 +1,8 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes" access="global" >
+    <aura:attribute name="feedback" type="Feedback__c" default="{'sobjectType','Feedback__c'}"/>
+    <aura:attribute name="pickList" type="List"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <lightning:card title="Feedback">
+        heelo
+    </lightning:card> 
+</aura:component>

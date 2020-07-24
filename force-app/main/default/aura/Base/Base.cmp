@@ -1,0 +1,23 @@
+<aura:component implements="flexipage:availableForAllPageTypes" description="Example usage of custom modal window for  Lead record edit">
+    <aura:attribute name="lead" type="Lead" />
+
+    <aura:attribute name="showModalEditLead" type="Boolean" default="false" />
+    <aura:attribute name="showModalB" type="Boolean" default="false" />
+
+    <lightning:button label="Open Edit Lead Modal" onclick="{!c.handleModalEditLeadOpen}" />
+    <lightning:button label="Open Modal B" onclick="{!c.handleOpenModalB}" />
+
+    <c:CustomModel title="Lead Edit" isActive="{!v.showModalEditLead}">
+        <!-- Content of the modal window -->
+        <c:CustomLeadEdit record="{!v.lead}" />
+
+        <aura:set attribute="footer">
+            <lightning:button variant="neutral" label="Cancel" onclick="{!c.handleModalEditLeadCancel}" />
+            <lightning:button variant="brand" label="Save" onclick="{!c.handleModalEditLeadSave}" />
+        </aura:set>
+    </c:CustomModel>
+
+    <c:CustomModel isActive="{!v.showModalB}">
+        Welcome to Modal B!
+    </c:CustomModel>
+</aura:component>

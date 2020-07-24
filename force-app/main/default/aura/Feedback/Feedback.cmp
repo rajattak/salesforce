@@ -1,0 +1,37 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:hasRecordId" access="global" >
+    <aura:attribute name="fields" type="String[]" default="['Ambience__c','Food__c','Rating__c','Feedback__c']" />
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="backgroundImageURL" type="String" default=""/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <div class="slds-grid slds-gutters">
+  <div class="slds-col slds-size_1-of-2">
+    <span>
+      <lightning:carousel disableAutoRefresh="false" disableAutoScroll="false">
+        <lightning:carouselImage
+            src = "{!$Resource.FirstImage}"
+            alternativeText = "First card accessible description.">
+        </lightning:carouselImage>
+        <lightning:carouselImage
+            src = "{!$Resource.SecondImage}"
+            alternativeText = "Second card accessible description.">
+        </lightning:carouselImage>
+        <lightning:carouselImage
+            src = "{!$Resource.ThirdImage}"
+            alternativeText = "Third card accessible description.">
+        </lightning:carouselImage>
+    </lightning:carousel>
+    </span>
+  </div>
+  <div class="slds-col slds-size_1-of-2">
+    <span>
+        <div style="{!'position: relative; background:' + v.backgroundColor + ' url(' + v.backgroundImageURL +') no-repeat;background-position: center;background-size: cover;'}">
+            <lightning:recordForm
+                aura:id="feedback"
+                objectApiName="Feedback__c"
+                fields="{!v.fields}"
+                onsuccess="{!c.handleSuccess}"/>
+        </div>
+    </span>
+  </div>
+  </div>
+</aura:component>

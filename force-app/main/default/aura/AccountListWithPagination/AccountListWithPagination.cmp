@@ -1,0 +1,69 @@
+<aura:component controller="AccountListForPagination" implements="flexipage:availableForAllPageTypes" access="global" >
+	<aura:attribute name="AccountData" type="Object"/>
+    <aura:attribute name="columns" type="List"/>
+    <aura:attribute name="contactList" type="Object"/>
+    <aura:attribute name="contactName" type="Contact" default="{'sobjectType':'Contact'}"/>
+    <aura:attribute name="contactId" type="String"/>
+    <aura:attribute name="model" type="Boolean" default="false"/>
+    <aura:attribute name="modelToCreateContact" type="Boolean" default="false"/>
+    
+    <aura:attribute name="PaginationList" type="Account"/>
+    <aura:attribute name="startPage" type="Integer" />
+    <aura:attribute name="endPage" type="Integer"/>
+    <aura:attribute name="totalRecords" type="Integer"/>
+    <aura:attribute name="pageSize" type="Integer" default="5"/>
+    
+    <aura:handler name="init" value="{! this }" action="{! c.doInit }"/>
+    <aura:handler name="accountEvent" event="c:AccountEvent" action="{!c.doInit}"/>
+    
+    <c:AccountComponent/>
+    
+    <c:ContactsRelatedToAccount isActive="{!v.model}">
+        <lightning:card title="Contacts">
+            <table>
+                <td>First Name</td>
+                <td>Last Name</td>
+                <aura:iteration items="{!v.contactList}" var="contact">
+                    <tr>
+                        <td>{!contact.FirstName}</td>
+                        <td>{!contact.LastName}</td>
+                    </tr>
+                </aura:iteration>
+            </table>
+            <lightning:button label="New Contact" onclick="{!c.handleModel}"/>
+        </lightning:card>
+    </c:ContactsRelatedToAccount>
+    
+    <c:ContactsRelatedToAccount isActive="{!v.modelToCreateContact}">
+        <lightning:card title="New Contact">
+            <div class="slds-var-p-around_medium">
+                <lightning:input label="First Name" value="{!v.contactName.FirstName}"/>
+            </div>
+            <div class="slds-var-p-around_medium">
+                <lightning:input label="Last Name" required="true" value="{!v.contactName.LastName}"/>
+            </div>
+            <div class="slds-var-p-around_medium">
+            <lightning:button variant="brand" label="Create" title="Brand action" onclick="{!c.createContactForAccount}" />
+            </div>
+        </lightning:card>
+    </c:ContactsRelatedToAccount>
+    
+    <lightning:card title="All Accounts">
+        <div class="slds-m-top_medium" >
+        <lightning:datatable data="{! v.PaginationList }" class="slds-m-top_medium"
+                             columns="{! v.columns }" 
+                             onrowaction="{!c.editRecord}"
+                             keyField="id"
+                             hideCheckboxColumn="true"/>	
+        <br/>
+        <lightning:buttonGroup >
+            <lightning:button label="Previous" disabled="{!v.startPage == 0}"  
+                              onclick="{!c.previous}" variant="brand"
+                              iconName='utility:back'/>
+            <lightning:button label="Next" disabled="{!v.endPage >= v.totalRecords}" 
+                              onclick="{!c.next}" variant="brand"
+                              iconName='utility:forward' iconPosition='right'/>
+        </lightning:buttonGroup>
+    </div>
+    </lightning:card>
+</aura:component>

@@ -1,0 +1,9 @@
+<apex:page >        
+    <apex:includeLightning />
+    <div id="a"/>
+    <script>
+        $Lightning.use("c:SearchApplication", function() {
+            $Lightning.createComponent("c:SearchBox",{},"a");
+            });        
+      </script>
+</apex:page>

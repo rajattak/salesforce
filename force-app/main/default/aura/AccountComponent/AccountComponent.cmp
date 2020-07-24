@@ -1,0 +1,33 @@
+<aura:component controller="AccountInsert" implements="flexipage:availableForAllPageTypes" access="global" >
+    <aura:attribute name="accountName" type="String"/>
+    <aura:attribute name="boolean" type="Boolean"/>
+    <aura:attribute name="active" type="String"/>
+    <aura:attribute name="date" type="Date"/>
+    <aura:attribute name="accountInsert" type="Account"/>
+    <aura:registerEvent name="accountEvent" type="c.AccountEvent"/>
+    
+    <lightning:card title="Account">
+        <div class="slds-var-p-around_medium">
+            <lightning:input label="Account Name" value="{!v.accountName}"/>
+        </div>
+        
+        <div class="slds-var-p-around_medium">        
+            <lightning:input label="Date" type="Date" value="{!v.date}"/>
+        </div>
+        
+        <div class="slds-var-p-around_medium">        
+            <lightning:select name="isActive" label="Active" value="{!v.active}">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </lightning:select>
+        </div>
+        
+        <div class="slds-var-p-around_medium">
+            <lightning:input type="checkbox" label="Accept" checked="{!v.boolean}"/>
+        </div>
+        
+        <div class="slds-var-p-around_medium">
+            <lightning:button variant="brand" label="Create" title="Brand action" onclick="{!c.accountHandler}" />
+        </div>
+    </lightning:card>
+</aura:component>

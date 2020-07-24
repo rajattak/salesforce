@@ -1,0 +1,13 @@
+<aura:component controller="AccountListController" implements="flexipage:availableForAllPageTypes" access="global" >
+    <aura:attribute name="accountList" type="List"/>
+    <aura:attribute name="accountColumns" type="List"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    
+    <lightning:card title="Recent Accounts">
+        <lightning:datatable data="{!v.accountList}"
+                         columns="{!v.accountColumns}"
+                         keyField="Id"
+                         hideCheckboxColumn="true"/>         
+    </lightning:card>
+    <c:AccountComponent/>    
+</aura:component>

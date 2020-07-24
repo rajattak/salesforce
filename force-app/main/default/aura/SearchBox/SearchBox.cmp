@@ -1,0 +1,35 @@
+<aura:component controller="SearchController" implements="flexipage:availableForAllPageTypes" access="global" >
+    <aura:attribute name="accountData" type="Object"/>
+    <aura:attribute name="accountColumns" type="List"/>
+    <aura:attribute name="contactData" type="Object"/>
+    <aura:attribute name="contactColumns" type="List"/>
+    <aura:attribute name="leadData" type="Object"/>
+    <aura:attribute name="leadColumns" type="List"/>
+    
+    <aura:attribute name="searchAccount" type="Boolean" default="false"/>
+    
+    <aura:handler name="init" value="{! this }" action="{! c.doInit }"/>
+    
+    <lightning:card title="Search Results">
+        <div class="slds-input-has-icon slds-input-has-icon--right">
+            <lightning:input type="text" aura:id="searchKey" class="form-control" onkeyup="{!c.handleChange}" updateon="keyup" placeholder="Search"/>
+        </div>
+    </lightning:card>
+    
+    <aura:if isTrue="{!v.searchAccount}">
+       <lightning:card title="Account">
+            <lightning:datatable data="{!v.accountData }" class="slds-m-top_medium"
+                             columns="{!v.accountColumns }"
+                             keyField="id"
+                             hideCheckboxColumn="true"/>
+           <lightning:datatable data="{!v.contactData }" class="slds-m-top_medium"
+                             columns="{!v.contactColumns }"
+                             keyField="id"
+                             hideCheckboxColumn="true"/>
+           <lightning:datatable data="{!v.leadData }" class="slds-m-top_medium"
+                             columns="{!v.leadColumns }"
+                             keyField="id"
+                             hideCheckboxColumn="true"/>
+        </lightning:card> 
+    </aura:if>
+</aura:component>
